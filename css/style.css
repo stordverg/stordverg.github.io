@@ -107,8 +107,9 @@ a {
   background-repeat: no-repeat;
   transition: background-size 200ms linear;
   padding: 6px 0;
-      letter-spacing: 0.03em !important;
-font-weight: 900;
+  letter-spacing: 0.03em !important;
+  font-weight: 400;
+  color: hsl(240deg, 100%, 85%)
 }
 
 a:hover {
@@ -257,7 +258,7 @@ header div:last-child {
 
   .contacts {
     visibility: visible;
-    display: inline;
+    display: block;
   }
 
 }
