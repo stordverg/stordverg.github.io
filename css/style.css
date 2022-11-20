@@ -1,0 +1,226 @@
+:root {
+  --inner: #090909;
+  --outer: #212121;
+  --blue: #0361CF;
+  --light: #ffffff;
+  --size-01: 1rem;  /** 16px **/
+  --size-02: 2rem;  /** 24px **/
+  --size-03: 3rem;  /** 48px **/
+  --size-04: 4rem;  /** 64px **/
+  --size-05: 5rem;  /** 80px **/
+  --size-06: 6rem;  /** 80px **/
+  --size-07: 7rem;  /** 80px **/
+  --page-shrink: 6rem;
+  --page-full: calc(var(--page-shrink) * 2);  /** 80px **/
+
+  --baseline: 0.25rem; /** 4px **/
+  --baseline-multiplier: 7;
+  --line-height: calc(var(--baseline-multiplier) * var(--baseline));
+  --font-size: calc(var(--line-height) / 1.4);  
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  src:
+    url('../font/Mona-Sans.woff2') format('woff2 supports variations'),
+    url('../font/Mona-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: var(--light);
+}
+
+html {
+  height: -webkit-fill-available;
+  height: 100%;
+  font-family: 'Mona Sans';
+  font-feature-settings: unset;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  background: var(--outer);
+}
+
+main {
+  transition: all 300ms ease-in-out;
+  width: 100vw;
+  height: 100vh;
+  padding: var(--page-shrink);
+}
+
+hr {
+  background: white;
+  border: 2px solid white;
+  border-radius: 2px;
+  margin-left: calc((var(--page-shrink) / 2) * -1);
+  width: 70%;
+  margin-bottom: calc(var(--line-height) * 2);
+}
+
+h1, .h1 {
+  font-size: calc(var(--font-size) * 2);
+  font-weight: 900;
+  letter-spacing: 0.03rem;
+  margin-bottom: calc(var(--line-height) * 2);
+  line-height: calc(var(--line-height) * 2);
+}
+
+p {
+  font-weight: 200;
+  line-height: var(--line-height);
+  font-size: var(--font-size);  
+  margin-bottom: var(--line-height);
+}
+
+a {
+  text-decoration: none;
+  background-image: linear-gradient(#ffffff, #f4f4f4);
+  background-size: 0 1px;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 200ms linear;
+  padding: 6px 0;
+      letter-spacing: 0.03em !important;
+font-weight: 900;
+}
+
+a:hover {
+  background-size: 40% 1px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: var(--page-shrink);
+  padding: 1rem calc(var(--page-shrink) * 2);
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  grid-template-columns: 3fr repeat(4, 1fr);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+header div:first-child {
+  text-align: left;
+}
+
+header div:last-child {
+  text-align: right;
+}
+
+
+.container {
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "copy preview";
+  background-color: var(--inner);
+  gap: var(--size-04);
+  border-radius: var(--size-02);
+  min-height: 100%;
+  padding: var(--page-shrink);
+  transition: all 300ms ease-in-out;
+  margin-bottom: var(--page-shrink);
+
+  background-image: url("../pic/petr_novak_bw.jpg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: contain;
+}
+
+.container:hover {
+  background-image: url("../pic/petr_novak_color.jpg");
+}
+
+.fill {
+  padding: 0;
+  transition: all 300ms ease-in-out;
+}
+
+.fill .container {
+  padding: var(--page-full);
+  margin: 0;
+  border-radius: 0;
+  transition: all 300ms ease-in-out;
+}
+
+/** Font hover effect -------------------------------- **/
+.m-c {
+    --add: 0;
+    position: relative;
+    z-index: calc(1 + var(--add)*2);
+    display: inline-block;
+    font-weight: calc(400 + 900*var(--add));
+    font-stretch: calc(100% + 25%*var(--add));
+    color: hsl(240deg, 100%, calc(85% + 15% * var(--add)));
+    transition: transform .2s,color .2s,font-stretch .2s,font-weight .2s;
+}
+
+.m-c:hover {
+    --add: 1;
+}
+
+.m-c:hover+.m-c, .m-c:has(+.m-c:hover) {
+    --add: 0.7;
+}
+
+.m-c:hover+.m-c+.m-c, .m-c:has(+.m-c+.m-c:hover) {
+    --add: 0.45;
+}
+
+.m-c:hover+.m-c+.m-c+.m-c, .m-c:has(+.m-c+.m-c+.m-c:hover) {
+    --add: 0.2;
+}
+
+/** Breakpoints -------------------------------- **/
+
+@media (max-width: 1440px) {
+  :root {
+    --page-shrink: 3.5rem;
+    --baseline-multiplier: 6;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --page-shrink: 3rem;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+      "copy" 
+      "preview";
+  }
+}
+
+@media (max-width: 780px) {
+  header {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+ .figma, .instagram {
+  display: none;
+ }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-shrink: 2rem;
+    --baseline-multiplier: 5;
+  }
+}
+
+
