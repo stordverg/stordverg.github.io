@@ -139,6 +139,10 @@ header div:last-child {
   text-align: right;
 }
 
+header a {
+  font-weight: 900;
+}
+
 
 .container {
   display: grid;
